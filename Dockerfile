@@ -25,12 +25,12 @@ LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 EXPOSE 7777 7878
 
 # env used in the bootstrap
-ENV CONFIGPATH=/root/.local/share/Terraria/Worlds
+ENV CONFIGPATH=/worlds
 ENV LOGPATH=/tshock/logs
 ENV WORLD_FILENAME=""
 
 # Allow for external data
-VOLUME ["/root/.local/share/Terraria/Worlds", "/tshock/logs", "/plugins"]
+VOLUME ["/worlds", "/tshock/logs", "/plugins"]
 
 # install nuget to grab tshock dependencies
 RUN apt-get update -y && \
