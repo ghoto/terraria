@@ -4,7 +4,7 @@ echo "\nBootstrap:\nworld_file_name=$WORLD_FILENAME\nconfigpath=$CONFIGPATH\nlog
 echo "Copying plugins..."
 cp -Rfv /plugins/* ./ServerPlugins
 
-WORLD_PATH="/root/.local/share/Terraria/Worlds/$WORLD_FILENAME"
+WORLD_PATH="$CONFIGPATH/$WORLD_FILENAME"
 
 if [ -z "$WORLD_FILENAME" ]; then
   echo "No world file specified in environment WORLD_FILENAME."
@@ -20,7 +20,7 @@ else
     echo "Loading to world $WORLD_FILENAME..."
     mono --server --gc=sgen -O=all TerrariaServer.exe -configpath "$CONFIGPATH" -logpath "$LOGPATH" -world "$WORLD_PATH" "$@" 
   else
-    echo "Unable to locate $WORLD_PATH.\nPlease make sure your world file is volumed into docker: -v <path_to_world_file>:/root/.local/share/Terraria/Worlds"
+    echo "Unable to locate $WORLD_PATH.\nPlease make sure your world file is volumed into docker: -v <path_to_world_file>:$CONFIGPATH"
     exit 1
   fi
 fi
