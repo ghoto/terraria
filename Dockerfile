@@ -34,9 +34,6 @@ LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 # documenting ports
 EXPOSE 7777 7878
 
-# env used in the bootstrap
-ARG WORLD_FILENAME=default.wld
-
 # Allow for external data
 VOLUME ["/worlds", "/logs", "/plugins"]
 
@@ -52,6 +49,10 @@ RUN USER=tshock && \
 
 ## Set working directory to server
 WORKDIR /tshock
+
 USER tshock
+
+RUN mkdir -p .local/share/Terraria/
+
 # run the bootstrap, which will copy the TShockAPI.dll before starting the server
 ENTRYPOINT [ "/bin/sh", "bootstrap.sh" ]
